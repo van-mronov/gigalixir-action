@@ -1094,6 +1094,10 @@ async function run() {
     const gigalixirApp = core.getInput('GIGALIXIR_APP', baseInputOptions);
     const migrations = core.getInput('MIGRATIONS', baseInputOptions);
 
+    await core.group("Installing python3-setuptools", async () => {
+      await exec.exec('sudo apt-get install python3-setuptools')
+    });
+
     await core.group("Installing gigalixir", async () => {
       await exec.exec('sudo pip3 install gigalixir --ignore-installed six')
     });
