@@ -1094,24 +1094,16 @@ async function run() {
     const gigalixirApp = core.getInput('GIGALIXIR_APP', baseInputOptions);
     const migrations = core.getInput('MIGRATIONS', baseInputOptions);
 
-    await core.group("Installing python3-setuptools", async () => {
-      await exec.exec('sudo apt-get install build-essential libssl-dev libffi-dev cargo python3-setuptools')
+    await core.group("Update apt", async () => {
+      await exec.exec('sudo apt-get update')
     });
 
-    await core.group("Installing snapd", async () => {
-      await exec.exec('sudo apt install snapd')
-    });
-
-    await core.group("Installing rustup", async () => {
-      await exec.exec('sudo snap install rustup --classic')
-    });
-
-    await core.group("Rustup", async () => {
-      await exec.exec('sudo rustup default stable')
+    await core.group("Installing deps", async () => {
+      await exec.exec('sudo apt-get install -y python3 python3-pip git-core curl')
     });
 
     await core.group("Installing gigalixir", async () => {
-      await exec.exec('sudo pip3 install gigalixir --ignore-installed six')
+      await exec.exec('sudo pip3 install gigalixir --user')
     });
 
     await core.group("Logging in to gigalixir", async () => {
