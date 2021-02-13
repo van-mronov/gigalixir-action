@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.4.2
+- Use pip3 instead of pip.
+
 ## v0.4.1
 - Deployment works if the action is making the very first deployment.
 ## v0.4.0
