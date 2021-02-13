@@ -1098,6 +1098,10 @@ async function run() {
       await exec.exec('sudo apt-get install python3-setuptools')
     });
 
+    await core.group("Installing python3-setuptools", async () => {
+      await exec.exec('python -m pip install -U pip')
+    });
+
     await core.group("Installing gigalixir", async () => {
       await exec.exec('sudo pip3 install gigalixir --ignore-installed six')
     });
